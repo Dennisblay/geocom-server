@@ -21,7 +21,7 @@ func main() {
 	store, err := InitDb(configEnv.DBUrl)
 	s, err := api.NewServer(store)
 	if err != nil {
-		log.Fatal("cannot start api:", err)
+		fmt.Println("cannot start api:", err)
 	}
 
 	err = s.RunServer(configEnv.ServerAddress)
