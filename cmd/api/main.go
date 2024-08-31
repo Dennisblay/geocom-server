@@ -14,8 +14,6 @@ func main() {
 	configEnv, err := config.LoadConfig(".")
 	if err != nil {
 		fmt.Println("Cannot load configurations", "error", err)
-
-		return
 	}
 	fmt.Println("Configurations loaded")
 	store, err := InitDb(configEnv.DBUrl)
