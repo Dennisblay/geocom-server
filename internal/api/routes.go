@@ -2,7 +2,7 @@ package api
 
 func (s *Server) userRoutes() {
 	//USSD route
-	s.router.POST("/ussd", s.uss)
+	s.router.POST("/ussd", s.UssdController)
 	// Computation route
 	s.router.POST("/comp", s.computeController)
 	// User routes

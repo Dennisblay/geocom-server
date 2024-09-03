@@ -5,7 +5,7 @@ import (
 )
 
 // UssdController handles USSD requests.
-func UssdController(c *gin.Context) {
+func (s *Server) UssdController(c *gin.Context) {
 	// Read the variables sent via POST from our API
 	//phoneNumber := c.PostForm("phoneNumber")
 	text := c.PostForm("text")
