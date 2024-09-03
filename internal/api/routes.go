@@ -1,13 +1,14 @@
 package api
 
 func (s *Server) userRoutes() {
+	//USSD route
+	s.router.POST("/ussd", s.uss)
 	// Computation route
 	s.router.POST("/comp", s.computeController)
 	// User routes
 	userGroup := s.router.Group("/users")
 	{
 		userGroup.GET("/", s.getUsersController)
-		userGroup.POST("/ussd", s.ussdController)
 		userGroup.GET("/email-phone", s.getUserControllerByEmailOrPhone)
 		userGroup.GET("/:id", s.getUserByIDController)
 		userGroup.POST("/login", s.getUserByEmailAndPasswordController)

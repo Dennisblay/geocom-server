@@ -1,34 +1,41 @@
 package api
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
-func (s *Server) ussdController(c *gin.Context) {
-	sessionID := c.PostForm("sessionId")
-	phoneNumber := c.PostForm("phoneNumber")
-	networkCode := c.PostForm("networkCode")
-	serviceCode := c.PostForm("serviceCode")
+// UssdController handles USSD requests.
+func UssdController(c *gin.Context) {
+	// Read the variables sent via POST from our API
+	//phoneNumber := c.PostForm("phoneNumber")
 	text := c.PostForm("text")
-
-	fmt.Printf("Received USSD request - SessionID: %s, PhoneNumber: %s, NetworkCode: %s, ServiceCode: %s, Text: %s\n",
-		sessionID, phoneNumber, networkCode, serviceCode, text)
 
 	var response string
 
-	// Simulate a simple USSD menu
 	switch text {
 	case "":
-		response = "CON Welcome to our service.\n1. Check Balance\n2. Buy Airtime"
+		// This is the first request. Start the response with "CON"
+		response = "CON Welcome to GeoComp\n1. Buy Credits\n2. Exit"
 	case "1":
-		response = "END Your balance is $10"
+		// User chose to buy credits, show available plans
+		response = "CON Select Plan\n1. 10 credits ==> GH₵1\n2. 50 credits ==> GH₵5\n3. 100 credits ==> GH₵10"
 	case "2":
-		response = "CON Enter amount to buy airtime:"
+		// User chose to exit, end the session
+		response = "END Thank you for using GeoComp. Goodbye!"
+	case "1*1":
+		// User selected the 10 credits plan
+		response = "END You have selected the 10 credits plan for GH₵1.\n You will receive a mobile money prompt to proceed with the transaction"
+	case "1*2":
+		// User selected the 50 credits plan
+		response = "END You have selected the 50 credits plan for GH₵1.\n You will receive a mobile money prompt to proceed with the transaction"
+	case "1*3":
+		// User selected the 100 credits plan
+		response = "END You have selected the 100 credits plan for GH₵1.\n You will receive a mobile money prompt to proceed with the transaction"
 	default:
-		response = "END Invalid option"
+		// Handle unexpected input
+		response = "END Invalid input. Please try again."
 	}
 
-	c.String(http.StatusOK, response)
+	// Send the response back to the API
+	c.String(200, response)
 }
