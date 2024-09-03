@@ -5,7 +5,7 @@ import (
 )
 
 // UssdController handles USSD requests and simulates MTN Mobile Money payment.
-func UssdController(c *gin.Context) {
+func (s *Server) UssdController(c *gin.Context) {
 	//phoneNumber := c.PostForm("phoneNumber")
 	text := c.PostForm("text")
 
