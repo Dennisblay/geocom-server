@@ -33,7 +33,7 @@ func (s *Server) UssdController(c *gin.Context) {
 	case "1*1*1", "1*2*1", "1*3*1":
 		// Simulate MTN Mobile Money payment confirmation
 		response = "CON Enter your Mobile Money PIN to confirm payment"
-	case "1*1*1*<PIN>", "1*2*1*<PIN>", "1*3*1*<PIN>":
+	case "1*1*1*4040", "1*2*1*4040", "1*3*1*4040":
 		// Simulate successful payment after PIN entry
 		response = "END Payment successful! Thank you for your purchase."
 	case "1*1*2", "1*2*2", "1*3*2":
